@@ -35,28 +35,38 @@ function FormInput({
   required?: boolean;
 }) {
   const [isFocused, setIsFocused] = useState(false);
+  const hasValue = value.length > 0;
 
   return (
     <div className="relative">
+      {/* Enhanced label with better visibility */}
       <label 
         htmlFor={id}
-        className="block text-sm font-medium text-zinc-400 mb-2 font-[family-name:var(--font-inter)]"
+        className={`
+          block text-sm font-semibold mb-3 
+          font-[family-name:var(--font-inter)]
+          tracking-wide uppercase
+          transition-colors duration-200
+          ${isFocused ? 'text-white' : 'text-zinc-300'}
+          ${error ? 'text-[#ff6666]' : ''}
+        `}
       >
         {label}
-        {required && <span className="text-[#ff0033] ml-1">*</span>}
+        {required && <span className="text-[#ff0033] ml-1.5">*</span>}
       </label>
       
       <div className="relative">
-        {/* Glow effect on focus */}
+        {/* Subtle glow effect on focus */}
         <motion.div
-          className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-[#ff0033] via-[#ff006e] to-[#00ffff]"
+          className="absolute -inset-1 rounded-xl bg-gradient-to-r from-[#ff0033] via-[#ff006e] to-[#ff0033]"
           animate={{
-            opacity: isFocused ? 0.6 : error ? 0.4 : 0,
+            opacity: isFocused ? 0.4 : error ? 0.25 : 0,
           }}
-          transition={{ duration: 0.3 }}
-          style={{ filter: 'blur(4px)' }}
+          transition={{ duration: 0.25 }}
+          style={{ filter: 'blur(8px)' }}
         />
         
+        {/* Input field with premium styling */}
         <input
           id={id}
           type={type}
@@ -69,40 +79,85 @@ function FormInput({
           aria-invalid={!!error}
           aria-describedby={error ? `${id}-error` : undefined}
           className={`
-            relative w-full px-5 py-4 
-            bg-black/80 border rounded-lg 
-            text-white placeholder-zinc-500 
-            focus:outline-none transition-colors
+            relative w-full px-5 py-5
+            bg-zinc-950/90 backdrop-blur-sm
+            border-2 rounded-xl
+            text-white text-base
+            placeholder-zinc-600
+            focus:outline-none 
+            transition-all duration-200
             font-[family-name:var(--font-inter)]
             ${error 
-              ? 'border-[#ff0033] focus:border-[#ff0033]' 
-              : 'border-zinc-800 focus:border-[#ff0033]'
+              ? 'border-[#ff4444] focus:border-[#ff6666] bg-[#ff0033]/5' 
+              : isFocused
+                ? 'border-[#ff0033] bg-zinc-900/95'
+                : hasValue
+                  ? 'border-zinc-600 bg-zinc-900/90'
+                  : 'border-zinc-800 hover:border-zinc-700'
             }
           `}
         />
         
-        {/* Pulsing border on focus */}
-        {isFocused && !error && (
-          <motion.div
-            className="absolute inset-0 rounded-lg border border-[#ff0033] pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        )}
+        {/* Animated focus ring */}
+        <AnimatePresence>
+          {isFocused && !error && (
+            <motion.div
+              className="absolute inset-0 rounded-xl border-2 border-[#ff0033] pointer-events-none"
+              initial={{ opacity: 0, scale: 1.02 }}
+              animate={{ opacity: 0.6, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </AnimatePresence>
+        
+        {/* Success indicator when filled */}
+        <AnimatePresence>
+          {hasValue && !error && !isFocused && (
+            <motion.div
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Error indicator */}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#ff4444]"
+              initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       
-      {/* Error message */}
+      {/* Enhanced error message */}
       <AnimatePresence>
         {error && (
           <motion.p
             id={`${id}-error`}
-            initial={{ opacity: 0, y: -10, height: 0 }}
+            initial={{ opacity: 0, y: -8, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
-            exit={{ opacity: 0, y: -10, height: 0 }}
-            className="mt-2 text-sm text-[#ff0033] font-[family-name:var(--font-inter)]"
+            exit={{ opacity: 0, y: -8, height: 0 }}
+            className="mt-3 text-sm text-[#ff6666] font-medium font-[family-name:var(--font-inter)] flex items-center gap-2"
             role="alert"
           >
+            <span className="inline-block w-1 h-1 rounded-full bg-[#ff6666]" />
             {error}
           </motion.p>
         )}
@@ -127,36 +182,36 @@ function SubmitButton({
       disabled={isLoading}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#ff0033] to-[#ff006e] text-white font-semibold rounded-lg font-[family-name:var(--font-space-grotesk)] overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
-      whileHover={!isLoading ? { scale: 1.02 } : {}}
-      whileTap={!isLoading ? { scale: 0.98 } : {}}
+      className="relative w-full px-8 py-5 bg-gradient-to-r from-[#ff0033] to-[#ff006e] text-white font-bold text-base tracking-wide uppercase rounded-xl font-[family-name:var(--font-space-grotesk)] overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed border border-white/10"
+      whileHover={!isLoading ? { scale: 1.01 } : {}}
+      whileTap={!isLoading ? { scale: 0.99 } : {}}
     >
       {/* Shimmer effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
         initial={{ x: '-100%' }}
         animate={isHovered && !isLoading ? { x: '100%' } : { x: '-100%' }}
-        transition={{ duration: 0.6, ease: 'easeInOut' }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
       />
       
       {/* Glow effect */}
       <motion.div
-        className="absolute inset-0 rounded-lg"
+        className="absolute inset-0 rounded-xl"
         animate={{
           boxShadow: isHovered && !isLoading
-            ? '0 0 40px rgba(255, 0, 51, 0.6), 0 0 80px rgba(255, 0, 51, 0.3)'
-            : '0 0 20px rgba(255, 0, 51, 0.3)',
+            ? '0 0 30px rgba(255, 0, 51, 0.5), 0 0 60px rgba(255, 0, 51, 0.25), inset 0 1px 0 rgba(255,255,255,0.1)'
+            : '0 0 15px rgba(255, 0, 51, 0.25), inset 0 1px 0 rgba(255,255,255,0.1)',
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.25 }}
       />
       
-      <span className="relative z-10 flex items-center justify-center gap-2">
+      <span className="relative z-10 flex items-center justify-center gap-3">
         {isLoading ? (
           <>
             <motion.span
-              className="inline-block"
+              className="inline-block text-lg"
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
             >
               ⟳
             </motion.span>
@@ -166,7 +221,8 @@ function SubmitButton({
           <>
             {children}
             <motion.span
-              animate={{ x: isHovered ? 5 : 0 }}
+              className="text-lg"
+              animate={{ x: isHovered ? 4 : 0 }}
               transition={{ duration: 0.2 }}
             >
               →
@@ -188,21 +244,21 @@ function SuccessMessage({ message, onReset }: { message: string; onReset: () => 
       className="text-center"
     >
       <motion.div
-        className="p-8 bg-[#ff0033]/10 border border-[#ff0033]/30 rounded-xl relative overflow-hidden"
+        className="p-10 bg-gradient-to-b from-[#ff0033]/15 to-[#ff0033]/5 border-2 border-[#ff0033]/40 rounded-2xl relative overflow-hidden backdrop-blur-sm"
         animate={{ 
           boxShadow: [
-            '0 0 20px rgba(255, 0, 51, 0.2)',
-            '0 0 40px rgba(255, 0, 51, 0.4)',
-            '0 0 20px rgba(255, 0, 51, 0.2)',
+            '0 0 25px rgba(255, 0, 51, 0.15)',
+            '0 0 45px rgba(255, 0, 51, 0.25)',
+            '0 0 25px rgba(255, 0, 51, 0.15)',
           ]
         }}
-        transition={{ duration: 2, repeat: Infinity }}
+        transition={{ duration: 3, repeat: Infinity }}
       >
         {/* Shimmer sweep */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff0033]/10 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff0033]/8 to-transparent"
           animate={{ x: ['-100%', '100%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
         />
         
         {/* Success icon */}
@@ -210,10 +266,10 @@ function SuccessMessage({ message, onReset }: { message: string; onReset: () => 
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-          className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#ff0033]/20 flex items-center justify-center"
+          className="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-500/20 border-2 border-emerald-500/40 flex items-center justify-center"
         >
           <motion.span 
-            className="text-4xl text-[#ff0033]"
+            className="text-4xl text-emerald-400"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -222,19 +278,19 @@ function SuccessMessage({ message, onReset }: { message: string; onReset: () => 
           </motion.span>
         </motion.div>
         
-        <p className="text-white font-semibold text-xl mb-2 font-[family-name:var(--font-space-grotesk)] relative z-10">
+        <h3 className="text-white font-bold text-2xl mb-3 font-[family-name:var(--font-space-grotesk)] relative z-10">
           You&apos;re on the list!
-        </p>
-        <p className="text-zinc-400 font-[family-name:var(--font-inter)] relative z-10">
+        </h3>
+        <p className="text-zinc-300 text-lg font-[family-name:var(--font-inter)] relative z-10 leading-relaxed">
           {message}
         </p>
         
         {/* Option to subscribe another email */}
         <motion.button
           onClick={onReset}
-          className="mt-6 text-sm text-zinc-500 hover:text-[#ff0033] transition-colors font-[family-name:var(--font-inter)]"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          className="mt-8 text-sm text-zinc-400 hover:text-white transition-colors font-[family-name:var(--font-inter)] px-4 py-2 rounded-lg hover:bg-white/5"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           Subscribe another email →
         </motion.button>
@@ -372,7 +428,7 @@ export default function SubscribeForm() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5 }}
-          className="max-w-md mx-auto space-y-5"
+          className="max-w-md mx-auto space-y-6"
           noValidate
         >
           {/* Email field */}
