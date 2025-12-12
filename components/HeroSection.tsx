@@ -132,7 +132,7 @@ export default function HeroSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <span className="relative">
-                SYNTHETICA
+                AUTECHMATION
                 <motion.span
                   className="absolute -inset-2 bg-[#ff0033]/10 rounded-lg blur-xl"
                   animate={{ opacity: [0.3, 0.6, 0.3] }}

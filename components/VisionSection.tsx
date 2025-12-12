@@ -43,7 +43,7 @@ export default function VisionSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 From intelligent process orchestration to adaptive decision-making engines, 
-                SYNTHETICA will redefine what machines can do for you.{' '}
+                AUTECHMATION will redefine what machines can do for you.{' '}
                 <span className="text-[#00ffff] font-semibold">
                   The future is autonomous. The future is now.
                 </span>

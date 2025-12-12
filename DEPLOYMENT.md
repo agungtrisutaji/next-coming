@@ -1,6 +1,6 @@
 # Vercel Deployment Guide
 
-This guide explains how to deploy the SYNTHETICA Coming Soon page to Vercel with proper environment configuration.
+This guide explains how to deploy the AUTECHMATION Coming Soon page to Vercel with proper environment configuration.
 
 ## Quick Start
 
@@ -17,8 +17,8 @@ In Vercel Project Settings → Environment Variables, add:
 
 | Variable | Production | Preview | Development |
 |----------|------------|---------|-------------|
-| `NEXT_PUBLIC_SITE_URL` | `https://synthetica.ai` | `https://preview.synthetica.ai` | (optional) |
-| `NEXT_PUBLIC_SUBSCRIBE_API_URL` | `https://api.synthetica.ai/subscribe` | `https://staging-api.synthetica.ai/subscribe` | (leave empty for fake) |
+| `NEXT_PUBLIC_SITE_URL` | `https://autechmation.com` | `https://preview.autechmation.com` | (optional) |
+| `NEXT_PUBLIC_SUBSCRIBE_API_URL` | `https://api.autechmation.com/subscribe` | `https://staging-api.autechmation.com/subscribe` | (leave empty for fake) |
 
 ### 3. Deploy
 
@@ -31,9 +31,9 @@ Push to your repository and Vercel will automatically deploy.
 ### Recommended Setup
 
 ```
-main branch    →  Production deployment  (synthetica.ai)
-dev branch     →  Preview deployment     (dev.synthetica.ai)
-feature/*      →  Preview deployment     (feature-*.synthetica.ai)
+main branch    →  Production deployment  (autechmation.com)
+dev branch     →  Preview deployment     (dev.autechmation.com)
+feature/*      →  Preview deployment     (feature-*.autechmation.com)
 ```
 
 ### Configure in Vercel
@@ -71,8 +71,8 @@ Vercel has three environment types:
 Example:
 ```
 NEXT_PUBLIC_SUBSCRIBE_API_URL
-├── Production: https://api.synthetica.ai/subscribe
-├── Preview:    https://staging-api.synthetica.ai/subscribe
+├── Production: https://api.autechmation.com/subscribe
+├── Preview:    https://staging-api.autechmation.com/subscribe
 └── Development: (not set - uses fake implementation)
 ```
 
@@ -106,7 +106,7 @@ NEXT_PUBLIC_SUBSCRIBE_API_URL
 ### Add Custom Domain
 
 1. Go to **Project Settings** → **Domains**
-2. Add your domain: `synthetica.ai`
+2. Add your domain: `autechmation.com`
 3. Configure DNS at your registrar:
    - **A Record**: `76.76.21.21`
    - **CNAME**: `cname.vercel-dns.com`

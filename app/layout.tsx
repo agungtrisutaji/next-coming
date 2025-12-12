@@ -16,12 +16,12 @@ const inter = Inter({
 
 // Site configuration - update these for production
 const siteConfig = {
-  name: "SYNTHETICA",
+  name: "AUTECHMATION",
   tagline: "Intelligence Reimagined. Automation Perfected.",
-  description: "SYNTHETICA is building the future of AI-powered automation. Join our waitlist for exclusive early access to revolutionary intelligent systems that transform how businesses operate.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://synthetica.ai",
+  description: "AUTECHMATION is building the future of AI-powered automation. Join our waitlist for exclusive early access to revolutionary intelligent systems that transform how businesses operate.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://autechmation.com",
   ogImage: "/og-image.svg",
-  twitterHandle: "@synthetica_ai",
+  twitterHandle: "@autechmation_ai",
   themeColor: "#ff0033",
 };
 
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "intelligent systems",
     "AI platform",
     "process automation",
-    "SYNTHETICA",
+    "AUTECHMATION",
     "coming soon",
     "technology",
     "startup",

@@ -137,7 +137,7 @@ export default function Footer() {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <span className="text-xl font-bold text-white/50 font-[family-name:var(--font-space-grotesk)]">
-                SYNTHETICA
+                AUTECHMATION
               </span>
             </motion.div>
           </motion.div>
@@ -151,7 +151,7 @@ export default function Footer() {
             className="pt-4 border-t border-zinc-900/50"
           >
             <p className="text-sm text-zinc-600 font-[family-name:var(--font-inter)]">
-              © 2025 SYNTHETICA. All rights reserved.
+              © 2025 AUTECHMATION. All rights reserved.
             </p>
           </motion.div>
         </div>

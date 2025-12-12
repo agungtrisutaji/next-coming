@@ -28,7 +28,7 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-6 text-lg md:text-xl leading-relaxed text-zinc-300 font-[family-name:var(--font-inter)]">
               <p>
-                We are <span className="text-[#ff0033] font-semibold">SYNTHETICA</span>, 
+                We are <span className="text-[#ff0033] font-semibold">AUTECHMATION</span>, 
                 a next-generation technology company at the intersection of artificial 
                 intelligence and enterprise automation.
               </p>
