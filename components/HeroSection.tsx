@@ -10,13 +10,13 @@ function GlitchText({ children, className }: { children: string; className?: str
     <span className={`relative inline-block ${className}`}>
       <span className="relative z-10">{children}</span>
       <span 
-        className="absolute top-0 left-0 text-[#00ffff] animate-glitch-1 opacity-70"
+        className="absolute top-0 left-0 text-[#00ffff] animate-glitch-1 opacity-35"
         aria-hidden="true"
       >
         {children}
       </span>
       <span 
-        className="absolute top-0 left-0 text-[#ff0033] animate-glitch-2 opacity-70"
+        className="absolute top-0 left-0 text-[#ff0033] animate-glitch-2 opacity-35"
         aria-hidden="true"
       >
         {children}
@@ -119,7 +119,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Brand section with parallax */}
-        <ParallaxSection offset={30}>
+        <ParallaxSection offset={15}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function HeroSection() {
             className="space-y-4"
           >
             <motion.h2 
-              className="text-3xl md:text-5xl font-bold text-white font-[family-name:var(--font-space-grotesk)]"
+              className="text-4xl md:text-6xl font-bold text-white font-[family-name:var(--font-space-grotesk)]"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -140,7 +140,7 @@ export default function HeroSection() {
                 />
               </span>
             </motion.h2>
-            <p className="text-xl md:text-2xl text-zinc-400 font-[family-name:var(--font-inter)]">
+            <p className="text-xl md:text-3xl text-zinc-300 font-[family-name:var(--font-inter)] leading-relaxed">
               Intelligence Reimagined. Automation Perfected.
             </p>
           </motion.div>
@@ -153,7 +153,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-12"
         >
-          <p className="text-sm md:text-base text-zinc-500 font-[family-name:var(--font-inter)] mb-8">
+          <p className="text-base md:text-lg text-zinc-400 font-[family-name:var(--font-inter)] leading-relaxed mb-8">
             The future of AI-powered automation is being built. Stay tuned.
           </p>
           
@@ -176,29 +176,59 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.8 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
+          <motion.a
+            href="#about"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-3 cursor-pointer group"
           >
-            <span className="text-xs text-zinc-600 uppercase tracking-widest font-[family-name:var(--font-inter)]">
-              Scroll
+            {/* Text label with better visibility */}
+            <span className="text-sm text-zinc-400 uppercase tracking-[0.2em] font-medium font-[family-name:var(--font-inter)] group-hover:text-white transition-colors">
+              Scroll to explore
             </span>
-            <div className="relative w-6 h-10 border-2 border-[#ff0033]/50 rounded-full flex items-start justify-center p-2 overflow-hidden">
-              <motion.div 
-                className="w-1.5 h-3 bg-[#ff0033] rounded-full"
-                animate={{ y: [0, 16, 0], opacity: [1, 0, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
+            
+            {/* Mouse scroll indicator */}
+            <div className="relative">
+              {/* Pulsing glow background */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-[#ff0033]/20 to-transparent"
-                animate={{ opacity: [0, 0.5, 0] }}
+                className="absolute -inset-2 bg-[#ff0033]/20 rounded-full blur-md"
+                animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
+              
+              {/* Mouse shape */}
+              <div className="relative w-7 h-12 border-2 border-zinc-500 group-hover:border-[#ff0033] rounded-full flex items-start justify-center p-2 transition-colors">
+                <motion.div 
+                  className="w-1.5 h-3 bg-[#ff0033] rounded-full"
+                  animate={{ y: [0, 18, 0], opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
             </div>
-          </motion.div>
+            
+            {/* Animated chevrons */}
+            <div className="flex flex-col items-center -mt-1">
+              <motion.div
+                animate={{ opacity: [0.8, 0.3, 0.8], y: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg className="w-4 h-4 text-[#ff0033]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.div>
+              <motion.div
+                animate={{ opacity: [0.5, 0.2, 0.5], y: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
+                className="-mt-2"
+              >
+                <svg className="w-4 h-4 text-[#ff0033]/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.div>
+            </div>
+          </motion.a>
         </motion.div>
       </div>
 
