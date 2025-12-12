@@ -34,6 +34,20 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
     overflow-x: hidden;
+    line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    
+    /* Subtle text shadow for better definition on dark backgrounds */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
   
   /* Custom scrollbar */
@@ -54,7 +68,7 @@ body {
     background: #ff335f;
   }
   
-  /* Glitch animation keyframes */
+    /* Glitch animation keyframes - Refined for readability */
   @keyframes glitch-1 {
   
     0%,
@@ -63,24 +77,18 @@ body {
       transform: translate(0);
     }
   
-    20% {
-      clip-path: inset(20% 0 60% 0);
-      transform: translate(-2px, 2px);
-    }
-  
-    40% {
-      clip-path: inset(40% 0 40% 0);
-      transform: translate(2px, -2px);
-    }
-  
-    60% {
-      clip-path: inset(60% 0 20% 0);
+        25% {
+          clip-path: inset(25% 0 65% 0);
       transform: translate(-1px, 1px);
     }
   
-    80% {
-      clip-path: inset(80% 0 10% 0);
+        50% {
+          clip-path: inset(50% 0 40% 0);
       transform: translate(1px, -1px);
+    }
+    75% {
+      clip-path: inset(70% 0 20% 0);
+      transform: translate(-0.5px, 0.5px);
     }
   }
   
@@ -92,34 +100,29 @@ body {
       transform: translate(0);
     }
   
-    20% {
-      clip-path: inset(60% 0 20% 0);
-      transform: translate(2px, -2px);
+        25% {
+          clip-path: inset(65% 0 25% 0);
+          transform: translate(1px, -1px);
     }
   
-    40% {
-      clip-path: inset(20% 0 60% 0);
-      transform: translate(-2px, 2px);
+        50% {
+          clip-path: inset(25% 0 65% 0);
+          transform: translate(-1px, 1px);
     }
   
-    60% {
-      clip-path: inset(80% 0 10% 0);
-      transform: translate(1px, -1px);
-    }
-  
-    80% {
-      clip-path: inset(40% 0 40% 0);
-      transform: translate(-1px, 1px);
+        75% {
+          clip-path: inset(40% 0 50% 0);
+          transform: translate(0.5px, -0.5px);
     }
   }
   
   .animate-glitch-1 {
-    animation: glitch-1 3s infinite linear;
+    animation: glitch-1 5s infinite ease-in-out;
   }
   
   .animate-glitch-2 {
-    animation: glitch-2 3s infinite linear;
-    animation-delay: 0.1s;
+    animation: glitch-2 5s infinite ease-in-out;
+      animation-delay: 0.15s;
   }
   
   /* Glow effects */
@@ -153,7 +156,7 @@ body {
     outline-offset: 2px;
   }
   
-  /* Reduced motion */
+    /* Reduced motion - Comprehensive motion safety */
   @media (prefers-reduced-motion: reduce) {
   
     *,
@@ -162,10 +165,23 @@ body {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   
+        /* Disable glitch effects completely but keep text visible */
     .animate-glitch-1,
     .animate-glitch-2 {
-      animation: none;
+      animation: none !important;
+        opacity: 0 !important;
+      }
+      
+      /* Reduce parallax motion */
+      [data-parallax] {
+        transform: none !important;
+      }
+      
+      /* Tone down pulsing effects */
+      .animate-pulse {
+        animation: none !important;
     }
-}
+    }
