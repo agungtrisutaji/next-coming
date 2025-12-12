@@ -13,10 +13,10 @@ export default function VisionSection() {
     <section
       id="vision"
       ref={ref}
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-gradient-to-b from-black via-[#0a0a0a] to-black"
+      className="relative py-28 md:py-36 lg:py-48 overflow-hidden bg-gradient-to-b from-black via-[#0a0a0a] to-black"
     >
-      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-16 text-center">
-        <ParallaxSection offset={60}>
+      <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-16 text-center">
+        <ParallaxSection offset={25}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -26,11 +26,12 @@ export default function VisionSection() {
               What&apos;s Coming
             </h2>
 
-            <div className="space-y-8 text-lg md:text-xl leading-relaxed text-zinc-300 font-[family-name:var(--font-inter)]">
+            <div className="space-y-10 text-xl md:text-2xl leading-relaxed text-zinc-200 font-[family-name:var(--font-inter)]">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
+                className="leading-relaxed"
               >
                 We&apos;re developing a revolutionary AI platform that{' '}
                 <span className="text-[#ff0033] font-semibold">automates the impossible</span>, 
@@ -41,6 +42,7 @@ export default function VisionSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
+                className="leading-relaxed"
               >
                 From intelligent process orchestration to adaptive decision-making engines, 
                 AUTECHMATION will redefine what machines can do for you.{' '}
