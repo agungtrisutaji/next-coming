@@ -13,7 +13,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
+      className="relative py-28 md:py-36 lg:py-48 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -26,13 +26,13 @@ export default function AboutSection() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 font-[family-name:var(--font-space-grotesk)]">
               Who We Are
             </h2>
-            <div className="space-y-6 text-lg md:text-xl leading-relaxed text-zinc-300 font-[family-name:var(--font-inter)]">
-              <p>
+            <div className="space-y-8 text-xl md:text-2xl leading-relaxed text-zinc-200 font-[family-name:var(--font-inter)]">
+              <p className="leading-relaxed">
                 We are <span className="text-[#ff0033] font-semibold">AUTECHMATION</span>, 
                 a next-generation technology company at the intersection of artificial 
                 intelligence and enterprise automation.
               </p>
-              <p>
+              <p className="leading-relaxed">
                 Our mission is to build intelligent systems that think, learn, and act—transforming 
                 how businesses operate in an increasingly complex digital landscape.
               </p>
@@ -40,7 +40,7 @@ export default function AboutSection() {
           </motion.div>
 
           {/* Visual element */}
-          <ParallaxSection offset={80}>
+          <ParallaxSection offset={35}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
