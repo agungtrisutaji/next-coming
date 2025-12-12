@@ -47,8 +47,9 @@ export default function AnimatedBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Detect mobile
+    // Detect mobile and reduced-motion preference
     isMobileRef.current = window.innerWidth < 768 || 'ontouchstart' in window;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Set canvas size with device pixel ratio for crisp rendering
     const setCanvasSize = () => {
@@ -61,6 +62,41 @@ export default function AnimatedBackground() {
       isMobileRef.current = window.innerWidth < 768 || 'ontouchstart' in window;
     };
     setCanvasSize();
+
+    // If user prefers reduced motion, show static background only
+    if (prefersReducedMotion) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      // Draw static gradient background
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, width, height);
+      
+      const gradient = ctx.createRadialGradient(
+        width / 2,
+        height / 2,
+        0,
+        width / 2,
+        height / 2,
+        width * 0.8
+      );
+      gradient.addColorStop(0, 'rgba(255, 0, 51, 0.06)');
+      gradient.addColorStop(0.5, 'rgba(10, 10, 10, 0.5)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+      
+      // Handle resize for static mode
+      window.addEventListener('resize', () => {
+        setCanvasSize();
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      });
+      
+      return;
+    }
 
     // Create particles with layers
     const particleCount = isMobileRef.current ? 40 : 80;
