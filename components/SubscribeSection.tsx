@@ -13,7 +13,7 @@ export default function SubscribeSection() {
     <section
       id="subscribe"
       ref={ref}
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
+      className="relative py-28 md:py-36 lg:py-48 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
         <motion.div
@@ -24,7 +24,7 @@ export default function SubscribeSection() {
         >
           {/* Section heading */}
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 font-[family-name:var(--font-space-grotesk)]"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -33,7 +33,7 @@ export default function SubscribeSection() {
           </motion.h2>
           
           <motion.p 
-            className="text-lg md:text-xl text-zinc-400 mb-12 font-[family-name:var(--font-inter)]"
+            className="text-xl md:text-2xl text-zinc-300 mb-12 font-[family-name:var(--font-inter)] leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
